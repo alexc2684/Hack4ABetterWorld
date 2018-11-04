@@ -14,3 +14,6 @@ To run any of the scripts, use the following command with its specified input pa
 ```
 python <SCRIPT_NAME>.py
 ```
+
+## TensorFlow Embedding Visualization
+To visualize the embeddings created by the generate_embeddings.py script, you can head to the [TensorFlow Projector](https://projector.tensorflow.org/) and load the specified .tsv data directly into the interface.

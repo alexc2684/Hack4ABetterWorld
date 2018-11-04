@@ -23,8 +23,8 @@ def get_embeddings(data):
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('-f', dest='data_path')
-    parser.add_argument('-e', dest='out_file_embeds')
-    parser.add_argument('-t', dest='out_file_text')
+    parser.add_argument('-e', dest='out_file_embeds', help='tsv file for embeddings')
+    parser.add_argument('-t', dest='out_file_text', help='tsv file for text')
     args = parser.parse_args()
 
     print("Reading data")
