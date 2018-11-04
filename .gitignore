@@ -1,1 +1,4 @@
-.ipynb_checkpoints
+embeddings/
+data/
+clean-news-data/
+.ipynb_checkpoints/
