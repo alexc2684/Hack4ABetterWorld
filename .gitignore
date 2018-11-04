@@ -2,3 +2,4 @@ embeddings/
 data/
 clean-news-data/
 .ipynb_checkpoints/
+__pycache__/
