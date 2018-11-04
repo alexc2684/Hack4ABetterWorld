@@ -1,25 +1,13 @@
 import csv
 import pandas as pd
 import numpy as np
-import ArgumentParser
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-from sklearn.decomposition import LatentDirichletAllocation, NMF
+from argparse import ArgumentParser
+from sklearn.feature_extraction.text import CountVectorizer
 from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
+from utils import preprocess
 
 stop_words = set(stopwords.words('english'))
-ps = PorterStemmer()
-
-def preprocess(sent):
-    string = ''
-    for word in sent.split(' '):
-        word = word.lower()
-        #clean text outside of stop words
-        if word.find('https') == -1 and word.find('amp') == -1:
-            curr = ps.stem(word)
-            string += curr + ' '
-    return string
 
 def bag_of_words(keyword, n):
     rows = db.loc[db['u4u_dataset'] == keyword]
@@ -35,14 +23,18 @@ def bag_of_words(keyword, n):
     return words_freq[:n]
 
 if __name__ == '__main__':
-  parser = ArgumentParser()
-  parser.add_argument('-f', dest='path')
-  parser.add_argument('-n', dest='num_words')
-  args = parser.parse_args()
+    parser = ArgumentParser()
+    parser.add_argument('-f', dest='path')
+    parser.add_argument('-o', dest='out_file')
+    parser.add_argument('-n', dest='num_words')
+    args = parser.parse_args()
 
-  db = pd.read_csv(args.path, lineterminator='\n')
-  keywords = db['u4u_dataset'].value_counts()
-
-  common_words = {}
-  for keyword in keywords.index:
-      common_words[keyword] = bag_of_words(keyword, args.num_words)
+    db = pd.read_csv(args.path, lineterminator='\n')
+    keywords = db['u4u_dataset'].value_counts()
+    with open(args.out_file, 'w') as f:
+        for keyword in keywords.index:
+            f.write(keyword + ',')
+            common_words = bag_of_words(keyword, args.num_words)
+            for i in range(args.num_words-1):
+                f.write(common_words[i] + ',')
+            f.write(common_words[args.num_words-1] + '\n')
