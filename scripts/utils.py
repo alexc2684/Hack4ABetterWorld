@@ -30,12 +30,11 @@ def open_csvs(paths):
         tmp = pd.read_csv(paths[i], lineterminator='\n')
         tmp['source'] = re.findall(r".*/(.*)\.csv", paths[i])[0]
         final = pd.concat([final, tmp], axis=0, ignore_index=True)
-    del tmp
-    final = final.drop(labels='Unnamed: 0', axis=1)
     return final
 
 def read_csvs(data_path):
-    paths = [data_path + '/' + path for path in os.listdir(data_path) if path.find('csv') != -1]
+    paths = [data_path + path for path in os.listdir(data_path) if path.find('csv') != -1]
+    print(paths)
     data = open_csvs(paths)
     return data
 
