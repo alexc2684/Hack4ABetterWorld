@@ -35,3 +35,7 @@ python generate_embeddings.py -f <DATA_PATH> -e <OUTPUT_EMBEDDING_FILE> -t <OUTP
 The `OUTPUT_EMBEDDING_FILE` and `OUTPUT_TEXT_FILE` are `.tsv` files.
 
 To visualize the embeddings created by the generate_embeddings.py script, you can head to the [TensorFlow Projector](https://projector.tensorflow.org/) and load the specified .tsv data directly into the interface.
+
+<div align="center">
+  <img src="/images/projector.png"><br><br>
+</div>
